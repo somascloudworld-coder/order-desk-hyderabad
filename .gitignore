@@ -1,0 +1,11 @@
+# OS and editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.idea/
+.vscode/
+
+# Nothing here needs a build, but in case a static server is run locally
+node_modules/
+.vercel/

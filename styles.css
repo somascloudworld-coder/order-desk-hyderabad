@@ -1,0 +1,456 @@
+/* ==========================================================================
+   Order Desk Hyderabad — one page
+   Palette, named exactly:
+     Saffron Thread   #C97B2B   accent only: buttons, one headline word, focus ring
+     Old Brass        #8A6A3B   small labels, icons, quiet rules
+     Night Ledger     #1C2B2A   header band, footer, the ground behind dark art
+     Warm Rice Cream  #F7F1E4   page background
+     Ink Black        #141414   body text
+   Type: Fraunces for headlines, Inter for body.
+   ========================================================================== */
+
+:root {
+  --saffron-thread: #C97B2B;
+  --old-brass: #8A6A3B;
+  --night-ledger: #1C2B2A;
+  --warm-rice-cream: #F7F1E4;
+  --ink-black: #141414;
+
+  /* Derived tints of the five, not new colours */
+  --ink-soft: rgba(20, 20, 20, 0.76);          /* Ink Black at 76% */
+  --cream-soft: rgba(247, 241, 228, 0.72);     /* Warm Rice Cream at 72% */
+  --card-surface: #FFFCF5;                     /* Warm Rice Cream, lifted for cards */
+  --hairline: #E2D9C4;                         /* Warm Rice Cream / Old Brass line */
+
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --wrap: 1120px;
+  --measure: 68ch;                 /* 60–75 characters a line */
+  --section-space: clamp(56px, 9vw, 112px);   /* 56px phone, 112px laptop */
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--warm-rice-cream);
+  color: var(--ink-black);
+  font-family: var(--font-body);
+  font-size: 1.125rem;             /* 18px floor */
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--ink-black);
+}
+
+p { margin: 0 0 1.1em; max-width: var(--measure); }
+
+a { color: var(--night-ledger); }
+
+:focus-visible {
+  outline: 3px solid var(--saffron-thread);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.wrap {
+  width: min(var(--wrap), 100% - 40px);
+  margin-inline: auto;
+}
+
+.narrow { max-width: min(var(--measure), 100% - 40px); }
+
+.section { padding-block: var(--section-space); }
+
+.label {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--old-brass);
+  margin: 0 0 10px;
+}
+
+h2 {
+  font-size: clamp(1.9rem, 4.2vw, 2.9rem);
+  line-height: 1.1;
+  margin: 0 0 24px;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+}
+.skip:focus {
+  left: 16px;
+  top: 16px;
+  z-index: 50;
+  background: var(--warm-rice-cream);
+  padding: 10px 16px;
+  border-radius: 8px;
+}
+
+/* ---------------------------------------------------------------- buttons */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;                 /* tap target */
+  padding: 12px 24px;
+  border-radius: 10px;
+  background: var(--saffron-thread);
+  color: var(--ink-black);          /* Ink Black on Saffron reads; white would not */
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  border: 1px solid var(--saffron-thread);
+}
+
+.btn { white-space: nowrap; }
+
+.btn:hover { background: #B96C22; border-color: #B96C22; }
+
+.btn-sm { min-height: 44px; padding: 10px 18px; font-size: 0.95rem; }
+.btn-lg { min-height: 56px; padding: 16px 30px; font-size: 1.05rem; }
+
+.btn-quiet {
+  background: transparent;
+  color: var(--night-ledger);
+  border: 1px solid var(--old-brass);
+}
+.btn-quiet:hover { background: rgba(138, 106, 59, 0.1); border-color: var(--old-brass); }
+
+/* ---------------------------------------------------------------- header */
+
+.site-header {
+  background: var(--night-ledger);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 76px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--warm-rice-cream);
+  min-width: 0;
+}
+
+.brand-mark { height: 40px; width: auto; display: block; }
+
+.brand-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+  color: var(--warm-rice-cream);
+}
+
+@media (max-width: 420px) {
+  .brand-name { font-size: 0.95rem; }
+  .brand { gap: 10px; }
+}
+
+/* ---------------------------------------------------------------- hero */
+
+.hero { padding-block: clamp(32px, 5vw, 64px) clamp(56px, 9vw, 96px); }
+
+.hero-grid {
+  display: grid;
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
+}
+
+h1 {
+  font-size: clamp(2.3rem, 6.4vw, 4.1rem);
+  line-height: 1.04;
+  margin: 0 0 22px;
+}
+
+.accent { color: var(--saffron-thread); }
+
+.lede {
+  font-size: clamp(1.1rem, 2.2vw, 1.32rem);
+  color: var(--ink-soft);
+  max-width: 34ch;
+  margin-bottom: 28px;
+}
+
+.hero-figure { margin: 0; }
+
+.hero-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 24%;
+  border-radius: 18px;
+}
+
+@media (min-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr 1fr; }
+  /* If the picture is missing, the words take the whole width back. */
+  .hero-grid:has(.hero-figure.is-missing) { grid-template-columns: 1fr; }
+}
+
+/* ---------------------------------------------------------------- pictures
+   These pictures are square, and each one is a composed scene with words of its
+   own inside it. Cropping a square into a wide strip cuts those words off, so the
+   square is shown whole. One band stays full width, exactly as the brief asks, and
+   carries its picture whole on the Night Ledger ground.                        */
+
+.figure-square {
+  width: min(720px, 100% - 40px);
+  margin: 0 auto;
+}
+
+.figure-square--wide { width: min(820px, 100% - 40px); }
+
+.figure-square img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+.band {
+  margin: 0;
+  background: var(--night-ledger);
+  padding-block: clamp(28px, 5vw, 56px);
+  display: flex;
+  justify-content: center;
+}
+
+.band--frame img {
+  display: block;
+  width: min(620px, 100% - 40px);
+  height: auto;
+  border-radius: 12px;
+}
+
+/* ---------------------------------------------------------------- problem */
+
+.quotes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 18px;
+}
+
+.quotes li {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.2rem, 2.7vw, 1.7rem);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  padding-left: 20px;
+  border-left: 3px solid var(--old-brass);
+  max-width: var(--measure);
+}
+
+/* ---------------------------------------------------------------- services */
+
+.cards {
+  display: grid;
+  gap: 20px;
+}
+
+@media (min-width: 780px) {
+  .cards { grid-template-columns: repeat(3, 1fr); }
+}
+
+.card {
+  background: var(--card-surface);
+  border: 1px solid var(--hairline);
+  border-radius: 16px;
+  padding: clamp(22px, 3vw, 34px);
+}
+
+.card h3 {
+  font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+  margin: 16px 0 8px;
+}
+
+.card p { margin: 0; color: var(--ink-soft); max-width: 40ch; }
+
+.icon {
+  width: 28px;
+  height: 28px;
+  display: block;
+  color: var(--old-brass);
+}
+
+.price {
+  margin-top: clamp(32px, 4vw, 48px);
+  padding-top: clamp(20px, 3vw, 30px);
+  border-top: 1px solid var(--hairline);
+}
+
+.price-line { margin: 0; color: var(--ink-soft); max-width: var(--measure); }
+
+.price-amount {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 4.4vw, 2.7rem);
+  letter-spacing: -0.02em;
+  margin: 6px 0 0;
+}
+
+/* ---------------------------------------------------------------- steps */
+
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 26px;
+}
+
+.steps li { display: flex; gap: 16px; align-items: flex-start; }
+
+.step-num {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--night-ledger);
+  color: var(--warm-rice-cream);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  display: grid;
+  place-items: center;
+}
+
+.steps p { margin: 0; font-size: 1.0625rem; max-width: 60ch; }
+
+/* ---------------------------------------------------------------- about */
+
+.about-grid { display: grid; gap: clamp(28px, 4vw, 52px); align-items: center; }
+
+@media (min-width: 860px) {
+  .about-grid { grid-template-columns: 1.55fr 1fr; }
+  .about-grid:has(.about-figure.is-missing) { grid-template-columns: 1fr; }
+}
+
+.about-name {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.about-name h2 { margin: 0; font-size: clamp(1.7rem, 3.2vw, 2.3rem); }
+
+.avatar {
+  flex: none;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 18%;
+}
+
+.quote-label {
+  color: var(--old-brass);
+  font-weight: 600;
+  margin: 26px 0 0;
+}
+
+blockquote {
+  margin: 10px 0 0;
+  padding-left: 20px;
+  border-left: 3px solid var(--old-brass);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  line-height: 1.35;
+}
+
+.about-figure { margin: 0; }
+
+.about-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+}
+
+/* ---------------------------------------------------------------- contact */
+
+.section-contact { padding-bottom: clamp(64px, 10vw, 132px); }
+
+.contact-lede { font-size: 1.1rem; color: var(--ink-soft); }
+
+.contact-alt {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+/* ---------------------------------------------------------------- footer */
+
+.site-footer {
+  background: var(--night-ledger);
+  color: var(--warm-rice-cream);
+  padding-block: clamp(44px, 6vw, 68px);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+/* The logo file is the stacked mark-over-wordmark on its own dark field. At footer
+   size the wordmark is unreadable and the field shows as a panel, so the mark sits
+   here and the business name is set as text, exactly as in the header. */
+.footer-mark { height: 46px; width: auto; display: block; }
+
+.footer-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  margin: 0 0 6px;
+  color: var(--warm-rice-cream);
+}
+
+.footer-links { margin: 0 0 8px; font-size: 0.95rem; }
+
+.footer-links a { color: var(--warm-rice-cream); }
+
+.footer-fine { margin: 0; color: var(--cream-soft); font-size: 0.85rem; }
+
+/* ---------------------------------------------- a missing picture steps out */
+
+figure.is-missing,
+img.is-missing { display: none; }
